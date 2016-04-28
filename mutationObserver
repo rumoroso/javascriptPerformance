@@ -1,28 +1,26 @@
-var target = document.querySelector('.sample-table');
+var mutationObserver = setMutationObserver(document.querySelector('.sample-table'));
 
-        // create an observer instance
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                console.log(mutation.type);
+function setMutationObserver(target){
+    var config = { // configuration of the observer
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true,
+            attributeOldValue: true
+        },
+        observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                // to do something with the mutations (group them, filter them...)
             });
+
+            // TODO: update the way to show the information
+            console.table(mutations);
         });
 
-        // configuration of the observer:
-        var config = { attributes: true, childList: true, characterData: true };
+    observer.observe(target, config);
 
-        // pass in the target node, as well as the observer options
-        observer.observe(target, config);
+    return observer;
+}
 
-        // later, you can stop observing
-
-
-        var insertedNodes = [];
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                console.log(mutation)
-                for (var i = 0; i < mutation.addedNodes.length; i++)
-                    insertedNodes.push(mutation.addedNodes[i]);
-            })
-        });
-        observer.observe(target, config);
-        console.log(insertedNodes);
+// to disconect the observer
+//mutationObserver.disconnect();
