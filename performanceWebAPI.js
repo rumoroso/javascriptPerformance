@@ -27,8 +27,8 @@ createMark('point_A');
 // it creates a measure between defined marks
 createMeasure('measure A to B', 'point_A', 'point_B');
 
-showPerformanceInfo('measure');
-showPerformanceInfo('mark');
+showPerformanceInfoByType('measure');
+showPerformanceInfoByType('mark');
 
 function createMark(markName) {
     if (performance.mark === undefined) {
