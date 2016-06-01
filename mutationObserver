@@ -1,26 +1,33 @@
-var mutationObserver = setMutationObserver(document.querySelector('.sample-table'));
+var mutationObserver = mutationObserver.set(document.querySelector('.sample-table'));
 
-function setMutationObserver(target){
-    var config = { // configuration of the observer
-            attributes: true,
-            childList: true,
-            characterData: true,
-            subtree: true,
-            attributeOldValue: true
-        },
-        observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                // to do something with the mutations (group them, filter them...)
+function mutationObserver () {
+
+    return {
+            set: setMutationObserver,
+            disconnect: function(observer){observer.disconnect()}
+        }
+
+    function setMutationObserver(target, configuration, callbackFn) {
+        var config,
+            defaultConfig = {
+                attributes: false,
+                childList: false,
+                characterData: false,
+                subtree: false,
+                attributeOldValue: false
+            },
+            observer = new MutationObserver(function (mutations) {
+                if(_.isFunction(callbackFn)){
+                    callbackFn(mutations);
+                }
             });
 
-            // TODO: update the way to show the information
-            console.table(mutations);
-        });
+        // childList by default
+        if (_.every(config, function (property) {return !property})) {
+            config.childList = true;
+        }
+        observer.observe(target, config);
 
-    observer.observe(target, config);
-
-    return observer;
-}
-
-// to disconect the observer
-//mutationObserver.disconnect();
+        return observer;
+    }
+};
