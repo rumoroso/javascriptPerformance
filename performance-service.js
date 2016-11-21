@@ -1,4 +1,4 @@
-module.exports = function () {
+function performanceService() {
     var performanceReferences = {
         // excludes unnecessary properties from the results
         mark: {exclude: ['duration', 'entryType'], cleanMethod: 'clearMarks'},
@@ -202,4 +202,4 @@ module.exports = function () {
             cache: {}
         }).count;
     }
-};
+}
