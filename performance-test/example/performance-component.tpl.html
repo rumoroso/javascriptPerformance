@@ -1,0 +1,12 @@
+<div>
+	<div>
+	    <span>Fetching time: <strong id="fetchDuration">{{$ctrl.fetchDuration}}</strong> </span><br/>
+    	<span>Rendering time: <strong id="renderDuration">{{$ctrl.renderDuration}}</strong> </span><br/>
+    	<span>Watchers: <strong id="numberOfWatchers">{{$ctrl.numberOfWatchers}}</strong> </span><br/>
+    </div>
+    <div>
+    	<label for="itemsLength">Number of items: 
+    		<input type="number" step="10" min="0" id="itemsLength" ng-model="$ctrl.itemsLength"/>
+    	</label>
+	    <button class="updateButton" type="button" ng-click="$ctrl.generate()">generate</button>
+</div>

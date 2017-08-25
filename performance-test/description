@@ -1,0 +1,27 @@
+1) install node
+2) install protractor:  npm install -g protractor
+3) update webdriver-manager: webdriver-manager update
+   note: Java Development Kit (JDK) is required
+
+4) run webdriver-manager: webdriver-manager start
+5) runt protractor with the config file as param: protractor conf.js
+
+The example needs a server. You can use http-server:
+	npm install -g http-server
+	http-server path_to_root
+According to the path of the root, you have to configure the URL in performance.spec.js
+
+
+
+
+El ejemplo está sacado de un caso real en el que hemos estado trabajando. En él se mide el rendimiento de un componente complejo que genera tablas. El eje Y es la medida de tiempo empleado en renderizar. En el eje X está secuencia cronológica de versiones sobre las que se analiza el rendimiento. Los test se ejecutan cada noche.
+
+De cara a poder enfatizar las posibles diferencias, se evaluaron tablas con el mismo número de filas y de columnas. Como las tabals podrían tener muy sutiles diferencias en rendimiento que podrían pasar inadvertidas, lo que se hizo fue utilizar tablas de grandes dimensiones (en este caso, 1000 filas y 15 columnas). De esta manera se pueden magnificar las diferencias e identificarlas.
+
+Cada una de las líneas es un tipo de tabla, habiendo tablas sencillas y tablas más complejas que incluyen multiples elementos generados programaticamente.Las pequeñas fluctuaciones que se perciben pueden ser debidas al rendimiento de la propia máquina en la que se desarrollan los test, de ahí que lo que se debe analizar en general es la tendencia. 
+
+Las tendencias en las gráficas nos muestran momentos en los que se produjeron cambios para mejor o para peor, lo que nos da una imagen más o menos realista del impacto de cualquier modificación. Cuando las tendencias de todas las gráficas evolucionan en el mismo sentido, se puede deber a que se han realizado cambios generales que afectan a todas las tablas, mientras que si una o varias tendencias difieren de las demás (por ejemplo, la marcada subida intermedia, es síntoma de cambios que afectan específicamente a dichas tablas.
+
+EL haber tenido medidas de rendimiento sobre este widget nos ha permitido minimizar el impacto de determinados cambios que a priori no deberían haber impactado pero que si lo hicieron. Asimismo, nos ha permitido trabajar directamente en introducir mejoras, como la que se pone de manifiesto en la primera de las grandes variaciones que muestra la gráfica. Vimos que un tipo de tabla tenía unos tiempos de renderizado muy elevados con respecto a otros. Tras etectar ese problema, entendimos dónde estaba el origen y qué cambios específicos para ese tipo de tabla se podrían realizar (en este caso concreto se "des-angularizó" parte del código y se pasó a utilizar vanilla javascript).
+
+Controlando el rendimiento de forma periódica, se pueden detectar a tiempo cambios que afecten negativamente al rendimiento y aplicar soluciones en etapas tempranas del desarrollo. Básicamente es un control continuo de calidad.
