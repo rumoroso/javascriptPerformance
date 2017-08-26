@@ -1,3 +1,7 @@
+<!-- This is just a simple list with ng-repeat. You could play 
+	 removing the "track by" or joining the two interpolations 
+	 in one, so the results in the performance test would vary,
+	 first in the time and second in the number of watchers -->
 <ul class="list-with-repeat">
     <li ng-repeat="item in $ctrl.items track by $index">
         Index: {{ $index }} / Value: {{ item }}

@@ -1,3 +1,6 @@
+// I added the whole example to the same file, although the logic would be that the 
+// application (or widget) to test should be in its own file and the logic for the 
+// testing (in this case, a component) should be in other.
 var example = angular.module('example', []);
 
 var itemListComponent = { // dummy component that is used as example to be tested
