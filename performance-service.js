@@ -1,3 +1,4 @@
+// I uses lodash methods, so it is required.
 function performanceService() {
     var performanceReferences = {
         // excludes unnecessary properties from the results
